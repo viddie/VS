@@ -16,8 +16,9 @@ public class SimpleChatServer implements ChatServer{
 	private ChatProxy chat;
 	
 	
-	public SimpleChatServer() {
-		chat = new SimpleChatProxy(this);
+	public SimpleChatServer() throws RemoteException {
+		ChatProxy someProx = new SimpleChatProxy(this);
+		chat = (ChatProxy) UnicastRemoteObject.exportObject(someProx, 0);
 	}
 	
 

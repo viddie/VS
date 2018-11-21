@@ -1,0 +1,180 @@
+\newpage
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+\paragraph{\LARGE Bearbeitung der Aufgaben - E-Mail}
+
+\section{\Large Aufgabe - eMail}
+	\subsubsection{\textbf{Aufgabenstellung}}
+	Wie funktioniert das SMTP Protokoll? (1 Punkt)
+	\subsubsection{\textbf{Vorbereitung}}
+	Für die Recherche wurde folgende Quelle verwendet: \cite{email}. Außerdem floß das eigene Wissen mit ein.\newline
+	\subsubsection{\textbf{Durchführung}}
+	SMTP bedeutet \textit|Simple Mail Transfer Protocol|, ist ein TCP/IP Protokoll und wird dafür verwendet zwischen Servern E-Mails zu senden und zu erhalten.\newline\newline
+
+Da es jedoch in seiner Fähigkeit beschränkt ist, Nachrichten auf der empfangenden Seite zu verarbeiten, wird es üblicherweise mit einem zweiten Protokoll wie POP3 oder IMAP genutzt (Zu diesen Protokollen später mehr).\newline\newline
+
+Ein Mail Client verbindet sich zu dem Beispiel-SMTP-Server auf \textit{mail.example.de} und benutzt den Port 25.\newline
+Nun führt das Mail Programm eine Konversation mit dem SMTP-Server durch und teilt dem SMTP-Server die Adresse des Absenders und die des Empfängers sowie den Nachrichtentext mit. \newline
+Der SMTP-Server nimmt die Beispiel-Empfänger-Adresse \textit|foo@maildomain.com| und teilt sie in zwei Teile auf.\newline
+Einmal in den Namen des Empfängers \textit|foo| und den Domain-Namen \textit|maildomain|.\newline
+Da der Empfänger eine andere Domain besitzt, muss der SMTP-Server mit der fremden Domain kommunizieren und spricht deshalb den DNS-Server an.\newline
+Der eigene SMTP Server fragt nach der IP Adresse des SMTP-Server von \textit|maildomain.com|. Der DNS-Server antwortet mit der gewünschten IP Adresse.
+Nun verbindet sich der eigene SMTP Server mit dem von \textit|maildomain.com| mit dem Port 25 und sendet diesen die Nachricht des Benutzers, danach wird die Verbindung getrennt.\newline
+Wenn aus irgendwelchen Gründe sich der eigene SMTP Server nicht mit dem des Empfängers verbinden kann, wird die Nachricht in eine Warteschlange geschoben.\newline\newline
+
+In den einfachsten Implementierungen von POP3 verwaltet der Server eine Sammlung von Textdateien. Eine für jedes E-Mail-Konto. Wenn eine Nachricht eingeht, hängt der POP3-Server sie einfach am Ende der Empfängerdatei an.\newline
+Wenn man seine E-Mails abrufen, stellt der eigene E-Mail-Client über Port 110 eine Verbindung zum POP3-Server her.\newline
+Der POP3-Server erfordert einen Kontonamen und ein Kennwort. Sobald man sich angemeldet hat, öffnet der POP3-Server die Textdatei und ermöglicht den Zugriff darauf.
+Der E-Mail-Client stellt eine Verbindung zum POP3-Server her und gibt eine Reihe von Befehlen aus, um Kopien der E-Mail-Nachrichten auf dem lokalen Computer zu bringen. 
+In der Regel werden die Nachrichten dann vom Server gelöscht.\newline\newline
+
+IMAP (Internet Mail Access Protocol) ist ein fortgeschrittenes Protokoll, zur Verwaltung von E-Mail Nachrichten und nutzt den Port 143. Der größte Vorteil von IMAP gegenüber POP3 ist die Möglichkeit seine Nachrichten auf dem Server zu belassen.\newline
+Der Hauptgrund dafür ist, dass die E-Mails auf dem Server verbleiben, und Benutzer von verschiedenen Computern aus eine Verbindung herstellen können. So sind die E-Mails überall aus zugreifbar.\newline
+Sobald man eine E-Mail heruntergeladen hat, bleibt sie bei POP3 auf dem Rechner hängen, auf dem sie heruntergeladen wurde.\newline
+Man kann seine Nachrichten in Ordnern verwalten die dann auch auf dem Server verbleiben.\newline\newline
+
+
+	\subsubsection{\textbf{Fazit}}
+	Wie man sehen kann ist der POP3 Server eine sehr simple Schnittstelle zwischen dem E-Mail Client und der Textdatei in der die eigenen Nachrichten liegen.
+\newline
+Es ist wichtig sich den Unterschied zwischen POP3 und IMAP vor Augen zu führen um nicht ausversehen seine E-Mails zu \verb|löschen|.
+Ein Problem kann auftreten wenn die E-Mails auf dem entfernten Server liegen und man nur über eine Internetverbindung darauf zugreifen kann. Aber dafür haben E-Mail Clients vorgesorgt und bieten die Möglichkeit an, E-Mails auf dem Computer zu cachen.
+Dadurch besitzt man eine Kopie auf der lokalen Maschine.
+Bei der Recherche traten keine Probleme auf.
+
+	
+\section{\Large Aufgabe - eMails versenden mit Javamail}
+	\subsection{\large Punkt a}
+		\subsubsection{\textbf{Aufgabenstellung}}
+		Verwenden Sie als SMTP Ausgangsserver einen Ihrer eigenen Mailaccounts, z.B. den der
+FH Bielefeld. Die Konfiguration kennen Sie aus den Hilfeseiten der DVZ. Das Programm
+soll in der Lage sein, eine Mail mit einem von Ihnen vorgegebenen Inhalt an eine beliebige
+Mailadresse zu senden. Der Inhalt der Mail soll aus einer Datei inhalt.txt aus dem
+Dateisystem Ihres Rechners eingelesen werden. (5 Punkte)
+		\subsubsection{\textbf{Vorbereitung}}
+		Zunächst muss man wissen, wie man den FH-Bielefeld SMTP-Server erreicht. Dazu steht auf der E-Mail Info-Seite der FH-Bielefeld\footnote{\url{https://www.fh-bielefeld.de/dvz/it-services/e-mail}}, dass der SMTP Server zu erreichen ist unter:
+		\begin{itemize}
+		\item Hostname: smtp.fh-bielefeld.de
+		\item Port: 587 (Standard für STARTTLS)
+		\end{itemize}
+		Anschließend benötigen wir Informationen dazu, wie man die Javamail API mit TLS nutzen kann. Dazu wenden wir uns an den JavaMail Guide von Pankaj \cite{mailWithJavamail}.Asdasd
+		\subsubsection{\textbf{Durchführung}}
+		Damit man eine E-Mail über den SMTP-Server der FH schicken kann, muss zuerst ein \textit{Authenticator} eingerichtet werden. Dazu erstellt man ein neues \textit{Properties} Objekt, setzt die Werte Host und Port, sowie die Flags \textit{auth} und \textit{starttls.enable}. Anschließend erstellt man den \textit{Authenticator} und übergibt ihn an die Session:
+		\begin{verbatim}
+		Authenticator auth = new Authenticator() {
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(fromEmail, password);
+			}
+		};
+		Session session = Session.getInstance(props, auth);
+		\end{verbatim}
+		
+		Nun wird eine \textit{MimeMessage} mit Hilfe der Session erstellt. In diese \textit{MimeMessage} schreibt man alle Daten, die man versenden möchte:
+		\begin{itemize}
+		\item Header (Content-Type, Mime-Type, Charset)
+		\item Charset
+		\item Sender Adresse, Name und Antwortadresse
+		\item Betreff
+		\item Empfänger (Können auch mehrere sein, getrennt mit einem Komma)
+		\item Inhalt der Mail (Text, Bilder, Anhänge)
+		\end{itemize}
+		
+		Abschließend wird die E-Mail mit der \textit{send}-Methode aus der Klasse \textit{Transport} versendet. Insgesamt sieht das Erstellen und Versenden der Nachricht so aus:
+		\begin{verbatim}
+		MimeMessage msg = new MimeMessage(session);
+			
+			msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+			msg.addHeader("format", "flowed");
+			msg.addHeader("Content-Transfer-Encoding", "8bit");
+
+			msg.setFrom(new InternetAddress("hannes.rueffer@fh-bielelf.de", "Hannes Rüffer"));
+			msg.setReplyTo(InternetAddress.parse("hannes.rueffer@fh-bielefeld.de", false));
+
+			msg.setSubject(subject, "UTF-8");
+			msg.setText(body, "UTF-8");
+			msg.setSentDate(new Date());
+			
+
+			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail, false));
+			Transport.send(msg);  
+		\end{verbatim}
+		
+		In der \verb|main|-Methode der Hauptklasse \verb|Mailsystem| werden mithilfe der Klasse \verb|FileReader| die nötigen txt.Dateien ausgelesen:
+
+\begin{lstlisting}
+FileReader fr = new FileReader();
+        ArrayList<String> empflist; Empfngerliste
+        try{
+            empflist = fr.readFileByLines(empf);
+        } catch (FileNotFoundException exc) {
+            System.out.println("Datei " + empf + " nicht gefunden!");
+            return;
+}
+\end{lstlisting}
+
+\verb|FileReader| besitzt die zwei Methoden \verb|readEntireFile| und \verb|readFileByLines|, welche ähnlich aufgebaut sind. Sie finden den Pfad der zu benutzenden Datei, scannen sie (benutzt den \verb|Java.util.Scanner|) und geben das Gewünschte als String bzw. ArrayList mit dem Typen String zurück. Dabei darf man die Exceptions nicht vergessen, denn diese könnten auftreten, wenn z.B. keine Datei gefunden wird.
+
+
+		\subsubsection{\textbf{Fazit}}
+		Das finden von Dateien mithilfe von relativen Pfaden ist auf verschiedene Arten umsetzbar in Java und kann auch für verwirrung sorgen. Jedoch hat dies nach kurzem Ausprobieren keine Probleme mehr bereitet.
+	\subsection{\large Punkt b}
+		\subsubsection{\textbf{Aufgabenstellung}}
+		Erweitern Sie ihr Programm so, dass automatich eine Liste von Empf¨angern aus der Datei empfaenger.txt eingelesen wird. (1 Punkt)
+		\subsubsection{\textbf{Vorbereitung}}
+		Bevor man eine Bibliothek nutzt, sollte man sie sich angucken. Dies haben wir auch mit javax.mail getan: https://docs.oracle.com/javaee/7/api/javax/mail/package-summary.html
+		\subsubsection{\textbf{Durchführung}}
+		Möchte man dann die Empfänger übergeben (siehe vorherige Aufgabe), kann man die ArrayListe der eingescannten Empfänger in einen String umwandeln, denn laut Dokumentation soll eine mit Komma separierte Liste innerhalb eines Strings verwendet werden.
+
+\begin{lstlisting}
+String addresses = "";
+for(String mail : toEmail){
+addresses += mail+",";
+}
+\end{lstlisting}
+
+
+Das Einlesen an sich wurde bereits in der vorherigen Aufgabe geschildert.
+
+		\subsubsection{\textbf{Fazit}}
+		Das finden von Dateien mithilfe von relativen Pfaden ist auf verschiedene Arten umsetzbar in Java und kann auch für verwirrung sorgen. Jedoch hat dies nach kurzem Ausprobieren keine Probleme mehr bereitet.
+	\subsection{\large Punkt c}
+		\subsubsection{\textbf{Aufgabenstellung}}
+		Fügen Sie ihrer Mail einen Anhang hinzu (zum Beispiel ein Bild oder PDF-Dokument). Erläutern Sie, in welcher Form der Anhang übertragen wird.
+		\subsubsection{\textbf{Vorbereitung}}
+		Um Anhänge in einer E-Mail zu versenden, muss man wissen, wie der Inhalt einer E-Mail mit Javamail funktioniert. Dazu haben wir die offizielle Dokumentation von Javamail herangezogen \cite{javamail}:
+		\begin{itemize}
+		\item Der Inhalt einer Mail kann ein \textit{Multipart} sein, welcher das rekursive Hinzufügen anderer \textit{Parts} erlaubt, wie z.B. \textit{BodyPart}.
+		\item \textit{BodyParts} enthalten den Inhalt, der in der Mail enthalten ist, also jeglicher Text, Bilder oder andere Dateien
+		\item Einem \textit{MimeBodyPart} (die Implementierung der abstrakten Klasse \textit{BodyPart}) kann dann eine \textit{DataSource} mitgegeben werden, indem man den \textit{DataHandler} des \textit{MimeBodyParts} mit der \textit{DataSource} setzt
+		\item Zuletzt wird der \textit{MimeBodyPart} dem \textit{Multipart} hinzugefügt
+		\end{itemize}
+		So erhält man einen \textit{MultiPart}, welcher dann der Nachricht hinzugefügt wird.
+		\newpage
+		\subsubsection{\textbf{Durchführung}}
+		Dort wo in der \textit{sendEmailWithAttachment} Methode vorher der E-Mail-Körper wie folgt gesetzt wurde,
+		\begin{verbatim}
+		msg.setSubject(subject, "UTF-8");
+		msg.setText(body, "UTF-8");
+		msg.setSentDate(new Date());
+		\end{verbatim}
+		wird jetzt zusätzlich erst der \textit{MultiPart} erstellt:
+		\begin{verbatim}
+		msg.setSubject(subject, "UTF-8");
+		msg.setSentDate(new Date());
+		
+		BodyPart messageBodyPart = new MimeBodyPart();
+		messageBodyPart.setText(body);
+
+		Multipart multipart = new MimeMultipart();
+		multipart.addBodyPart(messageBodyPart);
+
+		messageBodyPart = new MimeBodyPart();
+		DataSource source = new FileDataSource(filename);
+		messageBodyPart.setDataHandler(new DataHandler(source));
+		messageBodyPart.setFileName(filename);
+		multipart.addBodyPart(messageBodyPart);
+
+		msg.setContent(multipart);
+		\end{verbatim}
+		Man übergibt anschließend an die Methode den Dateinamen (Parameter \textit{filename}), der angehängt werden soll.
+		\subsubsection{\textbf{Fazit}}
+		Beim Anhängen von Dateien muss man darauf achten, dass die Dateien vom System gefunden werden. Das System sucht in dem Order, von dem aus man das Programm gestartet hat, nach den Dateien, sollten sie nicht gefunden werden, wird auch keine E-Mail verschickt.

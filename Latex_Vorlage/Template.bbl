@@ -1,0 +1,122 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global}
+    \entry{email}{online}{}
+      \name{author}{2}{}{%
+        {{hash=7ff305be41b4cc544e1d6d71489bca41}{%
+           family={Brain},
+           familyi={B\bibinitperiod},
+           given={Marshall},
+           giveni={M\bibinitperiod}}}%
+        {{hash=3eb105f8687fe87c3e34775c5337a6c7}{%
+           family={Crosby},
+           familyi={C\bibinitperiod},
+           given={Tim},
+           giveni={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{b9019902fba00d03af17306d9ec186e0}
+      \strng{fullhash}{b9019902fba00d03af17306d9ec186e0}
+      \strng{bibnamehash}{b9019902fba00d03af17306d9ec186e0}
+      \strng{authorbibnamehash}{b9019902fba00d03af17306d9ec186e0}
+      \strng{authornamehash}{b9019902fba00d03af17306d9ec186e0}
+      \strng{authorfullhash}{b9019902fba00d03af17306d9ec186e0}
+      \field{sortinit}{1}
+      \field{sortinithash}{2174f786c6195e7fe2ee1c229b416e29}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{addendum}{(accessed: 14.11.2018)}
+      \field{title}{How E-mail Works}
+      \verb{urlraw}
+      \verb https://computer.howstuffworks.com/e-mail-messaging/email.htm
+      \endverb
+      \verb{url}
+      \verb https://computer.howstuffworks.com/e-mail-messaging/email.htm
+      \endverb
+      \keyw{smtp,pop3,imap}
+    \endentry
+    \entry{mailWithJavamail}{online}{}
+      \name{author}{1}{}{%
+        {{hash=7d4c8c3470b81f66a333ea469d3bad82}{%
+           family={Pankaj},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{7d4c8c3470b81f66a333ea469d3bad82}
+      \strng{fullhash}{7d4c8c3470b81f66a333ea469d3bad82}
+      \strng{bibnamehash}{7d4c8c3470b81f66a333ea469d3bad82}
+      \strng{authorbibnamehash}{7d4c8c3470b81f66a333ea469d3bad82}
+      \strng{authornamehash}{7d4c8c3470b81f66a333ea469d3bad82}
+      \strng{authorfullhash}{7d4c8c3470b81f66a333ea469d3bad82}
+      \field{sortinit}{2}
+      \field{sortinithash}{cbff857e587bcb4635511624d773949e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{addendum}{(accessed: 14.11.2018)}
+      \field{title}{JavaMail Example – Send Mail in Java using SMTP}
+      \verb{urlraw}
+      \verb https://www.journaldev.com/2532/javamail-example-send-mail-in-java-smtp
+      \endverb
+      \verb{url}
+      \verb https://www.journaldev.com/2532/javamail-example-send-mail-in-java-smtp
+      \endverb
+      \keyw{smtp}
+    \endentry
+    \entry{javamail}{online}{}
+      \name{author}{3}{}{%
+        {{hash=8fbbbb2b3d9b3b9171815e02323e2e05}{%
+           family={Mani},
+           familyi={M\bibinitperiod},
+           given={John},
+           giveni={J\bibinitperiod}}}%
+        {{hash=e100c6c0d42aa647bd39c855b0f9f87e}{%
+           family={Shannon},
+           familyi={S\bibinitperiod},
+           given={Bill},
+           giveni={B\bibinitperiod}}}%
+        {{hash=33248083f6cd8dd7294d0a9e2a1634da}{%
+           family={Oberoi},
+           familyi={O\bibinitperiod},
+           given={Kanwar},
+           giveni={K\bibinitperiod}}}%
+      }
+      \strng{namehash}{6ddabf203dab56d46e72ec86ec9efeb1}
+      \strng{fullhash}{6ddabf203dab56d46e72ec86ec9efeb1}
+      \strng{bibnamehash}{6ddabf203dab56d46e72ec86ec9efeb1}
+      \strng{authorbibnamehash}{6ddabf203dab56d46e72ec86ec9efeb1}
+      \strng{authornamehash}{6ddabf203dab56d46e72ec86ec9efeb1}
+      \strng{authorfullhash}{6ddabf203dab56d46e72ec86ec9efeb1}
+      \field{sortinit}{3}
+      \field{sortinithash}{a4b52e5432884761f50fb9571273b93e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{addendum}{(accessed: 14.11.2018)}
+      \field{title}{JavaTM Platform, Enterprise Edition 6 API Specification}
+      \verb{urlraw}
+      \verb https://docs.oracle.com/javaee/6/api/javax/mail/internet/MimeBodyPart.html
+      \endverb
+      \verb{url}
+      \verb https://docs.oracle.com/javaee/6/api/javax/mail/internet/MimeBodyPart.html
+      \endverb
+      \keyw{javamail}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
